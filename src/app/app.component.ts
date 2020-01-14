@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 
 import { Map, Marker, Popup } from 'mapbox-gl';
+import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+
 import { LocationService } from './location.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -50,6 +53,7 @@ export class AppComponent {
 
   // Mapbox GL Map object (Mapbox is ran outside angular zone, keep that in mind when binding events from this object)
   map: Map;
+  @ViewChild('searchbox', { static: false }) searchBox: ElementRef;
 
   constructor(private locationService: LocationService) {}
 
@@ -58,6 +62,16 @@ export class AppComponent {
 
     // this.addFromJson();
     this.addFromService();
+
+    this.addGeocoder(map);
+  }
+
+  addGeocoder(map: Map) {
+    const geocoder = new MapboxGeocoder({
+      accessToken: environment.mapboxAccessToken,
+      position: 'top-left'
+    });
+    this.searchBox.nativeElement.appendChild(geocoder.onAdd(map));
   }
 
   addFromJson() {
