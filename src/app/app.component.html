@@ -1,8 +1,12 @@
 <mgl-map
   [style]="'mapbox://styles/mapbox/streets-v11'"
-  [zoom]="[5]"
-  [center]="[-90, 40]"
+  [zoom]="[11]"
+  [center]="[-73.995813, 40.730105]"
   [attributionControl]="false"
   (load)="loaded($event)"
 >
+  <mgl-control mglNavigation position="top-right"></mgl-control>
+  <mgl-control mglGeocoder position="top-left"></mgl-control>
+  <mgl-control mglScale unit="imperial" position="bottom-right"></mgl-control>
 </mgl-map>
+<div class="geocode"></div>
