@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { Map, Marker, Popup } from 'mapbox-gl';
+import { LocationService } from './location.service';
 
 @Component({
   selector: 'app-root',
@@ -50,10 +51,13 @@ export class AppComponent {
   // Mapbox GL Map object (Mapbox is ran outside angular zone, keep that in mind when binding events from this object)
   map: Map;
 
+  constructor(private locationService: LocationService) {}
+
   loaded(map: Map) {
     this.map = map;
 
-    this.addFromJson();
+    // this.addFromJson();
+    this.addFromService();
   }
 
   addFromJson() {
@@ -72,6 +76,25 @@ export class AppComponent {
       );
       marker.setPopup(popup);
       marker.addTo(this.map);
+    });
+  }
+
+  addFromService() {
+    const result = this.locationService.getLocations();
+    result.forEach(locations => {
+      locations.forEach(location => {
+        const marker = new Marker();
+        marker.setLngLat([location.coordinates[0], location.coordinates[1]]);
+        const popup = new Popup({ offset: 25 }).setHTML(
+          '<h3>' +
+            location.organization +
+            '</h3><div>' +
+            location.address1 +
+            '</div>'
+        );
+        marker.setPopup(popup);
+        marker.addTo(this.map);
+      });
     });
   }
 }
