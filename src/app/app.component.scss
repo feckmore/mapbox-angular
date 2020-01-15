@@ -3,11 +3,53 @@ mgl-map {
   width: 100%;
 }
 
+.page-container {
+  display: grid;
+  grid-template-areas: "searchArea mapArea";
+  grid-template-columns: 408px auto;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.map-container {
+  grid-area: mapArea;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.search-container {
+  grid-area: searchArea;
+  padding: 8px 8px 0 8px;
+  box-shadow: 0 20px rgba(0, 0, 0, 0.3); // does not work in grid
+}
+
 .geocoder {
-  position: absolute;
-  z-index: 1;
-  width: 50%;
-  left: 50%;
-  margin-left: -25%;
-  top: 20px;
+  // position: absolute;
+  // z-index: 1;
+  // width: 90%;
+
+  // left: 50%;
+  // margin-left: -25%;
+  // top: 20px;
+}
+
+.mat-card {
+  margin-top: 8px;
+}
+
+.mat-card-avatar {
+  height: 100%;
+  display: grid;
+  align-self: center;
+  text-align: center;
+  margin-right: 12px;
+}
+
+.mat-icon {
+  height: 40px;
+  width: 100%;
+  font-size: 40px;
+  align-self: center;
 }

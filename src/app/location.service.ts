@@ -27,7 +27,7 @@ interface Address {
   country: string;
 }
 
-interface Location extends Organization, Contact, Address {
+export interface MapLocation extends Organization, Contact, Address {
   id: string;
   coordinates: [number, number];
   distance: number;
@@ -40,7 +40,7 @@ interface Location extends Organization, Contact, Address {
 export class LocationService {
   constructor(private http: HttpClient) {}
 
-  getLocations(): Observable<Location[]> {
-    return this.http.get<Location[]>('/assets/locations.json');
+  getLocations(): Observable<MapLocation[]> {
+    return this.http.get<MapLocation[]>('/assets/locations.json');
   }
 }

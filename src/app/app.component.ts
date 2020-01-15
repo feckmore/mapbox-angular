@@ -3,8 +3,8 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Map, Marker, Popup } from 'mapbox-gl';
 import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 
-import { LocationService } from './location.service';
 import { environment } from 'src/environments/environment';
+import { LocationService, MapLocation } from './location.service';
 
 @Component({
   selector: 'app-root',
@@ -53,6 +53,7 @@ export class AppComponent {
 
   // Mapbox GL Map object (Mapbox is ran outside angular zone, keep that in mind when binding events from this object)
   map: Map;
+  locations: MapLocation[];
   @ViewChild('searchbox', { static: false }) searchBox: ElementRef;
 
   constructor(private locationService: LocationService) {}
@@ -96,6 +97,7 @@ export class AppComponent {
   addFromService() {
     const result = this.locationService.getLocations();
     result.forEach(locations => {
+      this.locations = locations;
       locations.forEach(location => {
         const marker = new Marker();
         marker.setLngLat([location.coordinates[0], location.coordinates[1]]);

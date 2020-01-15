@@ -10,6 +10,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 import { environment } from 'src/environments/environment';
 
+import { MatCardModule, MatIconModule } from '@angular/material';
+
 const mapboxAccessToken = environment.mapboxAccessToken;
 
 @NgModule({
@@ -19,6 +21,8 @@ const mapboxAccessToken = environment.mapboxAccessToken;
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    MatCardModule,
+    MatIconModule,
     NgxMapboxGLModule.withConfig({
       accessToken: mapboxAccessToken, // Optionnal, can also be set per map (accessToken input of mgl-map)
       geocoderAccessToken: mapboxAccessToken // Optionnal, specify if different from the map access token, can also be set per mgl-geocoder (accessToken input of mgl-geocoder)

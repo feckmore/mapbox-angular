@@ -1,11 +1,41 @@
-<mgl-map
-  [style]="'mapbox://styles/mapbox/streets-v11'"
-  [zoom]="[11]"
-  [center]="[-73.995813, 40.730105]"
-  [attributionControl]="false"
-  (load)="loaded($event)"
->
-  <mgl-control mglNavigation position="top-right"></mgl-control>
-  <mgl-control mglScale unit="imperial" position="bottom-right"></mgl-control>
-</mgl-map>
-<div #searchbox class="geocoder"></div>
+<div class="page-container">
+  <div class="map-container">
+    <mgl-map
+      [style]="'mapbox://styles/mapbox/streets-v11'"
+      [zoom]="[11]"
+      [center]="[-73.995813, 40.730105]"
+      [attributionControl]="false"
+      (load)="loaded($event)"
+    >
+      <mgl-control mglNavigation position="top-right"></mgl-control>
+      <mgl-control
+        mglScale
+        unit="imperial"
+        position="bottom-right"
+      ></mgl-control>
+    </mgl-map>
+  </div>
+  <div class="search-container">
+    <div #searchbox class="geocoder"></div>
+    <mat-card *ngFor="let location of locations">
+      <mat-card-header>
+        <div mat-card-avatar>
+          <mat-icon>star</mat-icon>
+          <div>{{ location.classification }}</div>
+        </div>
+        <mat-card-title
+          >{{ location.firstname }} {{ location.lastname }}</mat-card-title
+        >
+        <mat-card-subtitle>
+          <div>
+            {{ location.specialties }}
+          </div>
+          <div>
+            {{ location.address1 }}
+          </div>
+          <div>{{ location.locality }} {{ location.region }}</div>
+        </mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+  </div>
+</div>
