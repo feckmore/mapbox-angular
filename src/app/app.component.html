@@ -23,17 +23,21 @@
           <mat-icon>star</mat-icon>
           <div>{{ location.classification }}</div>
         </div>
-        <mat-card-title
-          >{{ location.firstname }} {{ location.lastname }}</mat-card-title
-        >
+        <mat-card-title>{{ location.fullname }}</mat-card-title>
         <mat-card-subtitle>
-          <div>
-            {{ location.specialties }}
+          <div class="specialty mat-small">
+            {{ location.specialties.join(", ") }}
+          </div>
+          <div class="distance mat-body-strong">
+            {{ location.distance | number: "1.1-1" }} {{ location.units }}
+          </div>
+          <div class="organization">
+            {{ location.organization }}
           </div>
           <div>
-            {{ location.address1 }}
+            {{ location.line1 }}
           </div>
-          <div>{{ location.locality }} {{ location.region }}</div>
+          <div>{{ location.line2 }}</div>
         </mat-card-subtitle>
       </mat-card-header>
     </mat-card>

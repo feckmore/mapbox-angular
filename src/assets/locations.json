@@ -9,7 +9,7 @@
     "specialties": ["Soup", "Bread"],
     "prefix": "Mr.",
     "firstname": "First",
-    "lastname": "Location",
+    "lastname": "Contact",
     "suffix": "Jr.",
     "address1": "56-45 Main Street",
     "address2": "",
@@ -18,7 +18,8 @@
     "postalcode": "10012",
     "country": "US",
     "coordinates": [-73.995813, 40.730105],
-    "units": "mi"
+    "units": "mi",
+    "distance": 2.2328402
   },
   {
     "id": "002-abc",
@@ -30,7 +31,7 @@
     "specialties": ["Pastry", "Appetizer"],
     "prefix": "Ms.",
     "firstname": "Second",
-    "lastname": "Location",
+    "lastname": "Contact",
     "suffix": "",
     "address1": "123 South Street",
     "address2": "",
@@ -39,6 +40,7 @@
     "postalcode": "10012",
     "country": "US",
     "coordinates": [-74.002487, 40.744527],
-    "units": "mi"
+    "units": "mi",
+    "distance": 3.28232
   }
 ]

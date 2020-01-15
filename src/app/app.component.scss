@@ -25,14 +25,15 @@ mgl-map {
   box-shadow: 0 20px rgba(0, 0, 0, 0.3); // does not work in grid
 }
 
-.geocoder {
-  // position: absolute;
-  // z-index: 1;
-  // width: 90%;
+.organization {
+  margin-top: 0;
+}
 
-  // left: 50%;
-  // margin-left: -25%;
-  // top: 20px;
+.specialty {
+  margin-bottom: 5px;
+}
+
+.geocoder {
 }
 
 .mat-card {
@@ -45,6 +46,10 @@ mgl-map {
   align-self: center;
   text-align: center;
   margin-right: 12px;
+}
+
+.mat-card-subtitle {
+  margin-bottom: 0;
 }
 
 .mat-icon {
