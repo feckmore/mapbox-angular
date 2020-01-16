@@ -60,7 +60,7 @@ export class LocationService {
       l.line1 = [l.address1, l.address2].join(' ').trim();
       l.line2 = [l.locality, l.region, l.postalcode].join(' ').trim();
       l.classification = l.classification.toUpperCase();
-      l.units = l.units.toUpperCase();
+      l.units = l.units.toLowerCase();
     }
 
     return locations;

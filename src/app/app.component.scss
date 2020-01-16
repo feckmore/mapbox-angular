@@ -6,55 +6,84 @@ mgl-map {
 .page-container {
   display: grid;
   grid-template-areas: "searchArea mapArea";
-  grid-template-columns: 408px auto;
+  grid-template-columns: auto 1fr;
   margin: 0;
   height: 100%;
   width: 100%;
-}
 
-.map-container {
-  grid-area: mapArea;
-  margin: 0;
-  height: 100%;
-  width: 100%;
-}
+  .map-container {
+    grid-area: mapArea;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+  }
 
-.search-container {
-  grid-area: searchArea;
-  padding: 8px 8px 0 8px;
-  box-shadow: 0 20px rgba(0, 0, 0, 0.3); // does not work in grid
-}
+  .search-container {
+    grid-area: searchArea;
 
-.organization {
-  margin-top: 0;
-}
+    .results {
+      display: flex;
+      flex-direction: column;
+      overflow: auto;
+      height: calc(100vh - 46px);
+      padding: 0 8px 4px 8px;
+    }
+  }
 
-.specialty {
-  margin-bottom: 5px;
-}
+  .organization {
+    margin-top: 0;
+  }
 
-.geocoder {
+  .specialty {
+    margin-bottom: 5px;
+  }
+
+  .distance {
+  }
+
+  .geocoder {
+  }
 }
 
 .mat-card {
   margin-top: 8px;
 }
 
-.mat-card-avatar {
-  height: 100%;
-  display: grid;
-  align-self: center;
-  text-align: center;
-  margin-right: 12px;
+.mat-card-header {
+  .mat-card-title {
+    margin-bottom: 6px;
+  }
+
+  .mat-card-avatar {
+    height: 100%;
+    display: grid;
+    align-self: center;
+    text-align: center;
+    margin-right: 12px;
+  }
+
+  .mat-icon {
+    height: 40px;
+    width: 100%;
+    font-size: 40px;
+    align-self: center;
+  }
+
+  .mat-card-subtitle {
+    margin-bottom: 0;
+  }
 }
 
-.mat-card-subtitle {
-  margin-bottom: 0;
-}
+@media (max-aspect-ratio: 8/8) {
+  .page-container {
+    grid-template-areas: "mapArea" "searchArea";
+    grid-template-columns: none;
+    grid-template-rows: 2fr 1fr;
 
-.mat-icon {
-  height: 40px;
-  width: 100%;
-  font-size: 40px;
-  align-self: center;
+    .search-container {
+      .results {
+        height: 40vh;
+      }
+    }
+  }
 }

@@ -17,29 +17,31 @@
   </div>
   <div class="search-container">
     <div #searchbox class="geocoder"></div>
-    <mat-card *ngFor="let location of locations">
-      <mat-card-header>
-        <div mat-card-avatar>
-          <mat-icon>star</mat-icon>
-          <div>{{ location.classification }}</div>
-        </div>
-        <mat-card-title>{{ location.fullname }}</mat-card-title>
-        <mat-card-subtitle>
-          <div class="specialty mat-small">
-            {{ location.specialties.join(", ") }}
+    <div class="results">
+      <mat-card *ngFor="let location of locations">
+        <mat-card-header>
+          <div mat-card-avatar>
+            <mat-icon>star</mat-icon>
+            <div>{{ location.classification }}</div>
           </div>
-          <div class="distance mat-body-strong">
-            {{ location.distance | number: "1.1-1" }} {{ location.units }}
-          </div>
-          <div class="organization">
-            {{ location.organization }}
-          </div>
-          <div>
-            {{ location.line1 }}
-          </div>
-          <div>{{ location.line2 }}</div>
-        </mat-card-subtitle>
-      </mat-card-header>
-    </mat-card>
+          <mat-card-title>{{ location.fullname }}</mat-card-title>
+          <mat-card-subtitle>
+            <div class="specialty mat-small">
+              {{ location.specialties.join(", ") | titlecase }}
+            </div>
+            <div class="organization">
+              {{ location.organization }} ({{
+                location.distance | number: "1.1-1"
+              }}
+              {{ location.units }})
+            </div>
+            <div>
+              {{ location.line1 }}
+            </div>
+            <div>{{ location.line2 }}</div>
+          </mat-card-subtitle>
+        </mat-card-header>
+      </mat-card>
+    </div>
   </div>
 </div>
