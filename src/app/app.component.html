@@ -18,7 +18,11 @@
   <div class="search-container">
     <div #searchbox class="geocoder"></div>
     <div class="results">
-      <mat-card *ngFor="let location of locations">
+      <mat-card
+        *ngFor="let location of locations"
+        (click)="cardSelected(location)"
+        [class.selected]="location.id == selectedLocationId"
+      >
         <mat-card-header>
           <div mat-card-avatar>
             <mat-icon>star</mat-icon>

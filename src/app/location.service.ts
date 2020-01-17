@@ -36,6 +36,7 @@ export interface MapLocation extends Organization, Contact, Address {
   coordinates: [number, number];
   distance: number;
   units: string;
+  selected: boolean;
 }
 
 @Injectable({

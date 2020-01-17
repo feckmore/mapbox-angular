@@ -16,6 +16,7 @@ export class AppComponent {
   map: Map;
   locations: MapLocation[];
   @ViewChild('searchbox', { static: false }) searchBox: ElementRef;
+  selectedLocationId: string;
 
   constructor(private locationService: LocationService) {}
 
@@ -52,5 +53,10 @@ export class AppComponent {
         marker.addTo(this.map);
       });
     });
+  }
+
+  cardSelected(location: MapLocation) {
+    console.log(location);
+    this.selectedLocationId = location.id;
   }
 }
