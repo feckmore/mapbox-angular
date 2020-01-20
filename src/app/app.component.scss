@@ -20,6 +20,7 @@ mgl-map {
 
   .search-container {
     grid-area: searchArea;
+    min-width: 400px;
 
     .geocoder {
     }

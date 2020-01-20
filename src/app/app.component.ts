@@ -18,6 +18,7 @@ export class AppComponent {
   locations: MapLocation[];
   @ViewChild('searchbox', { static: false }) searchBox: ElementRef;
   selectedLocationId: string;
+  center: [number, number] = [-73.995813, 40.730105];
 
   constructor(private locationService: LocationService) {}
 
