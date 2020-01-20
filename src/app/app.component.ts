@@ -5,6 +5,7 @@ import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 
 import { environment } from 'src/environments/environment';
 import { LocationService, MapLocation } from './location.service';
+// import { currentId } from 'async_hooks';
 
 @Component({
   selector: 'app-root',
@@ -57,6 +58,17 @@ export class AppComponent {
 
   cardSelected(location: MapLocation) {
     console.log(location);
-    this.selectedLocationId = location.id;
+    if (location.id !== this.selectedLocationId) {
+      // setting the selected location changes card styling
+      this.selectedLocationId = location.id;
+      this.flyToLocation(location.coordinates);
+    }
+  }
+
+  flyToLocation(coordinates: [number, number]) {
+    this.map.flyTo({
+      center: coordinates,
+      zoom: 15
+    });
   }
 }
