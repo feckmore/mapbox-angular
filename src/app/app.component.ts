@@ -5,7 +5,6 @@ import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 
 import { environment } from 'src/environments/environment';
 import { LocationService, MapLocation } from './location.service';
-// import { currentId } from 'async_hooks';
 
 @Component({
   selector: 'app-root',
@@ -16,9 +15,11 @@ export class AppComponent {
   // Mapbox GL Map object (Mapbox is ran outside angular zone, keep that in mind when binding events from this object)
   map: Map;
   locations: MapLocation[];
-  @ViewChild('searchbox', { static: false }) searchBox: ElementRef;
   selectedLocationId: string;
+  selectedLocation: MapLocation;
   center: [number, number] = [-73.995813, 40.730105];
+
+  @ViewChild('searchbox', { static: false }) searchBox: ElementRef;
 
   constructor(private locationService: LocationService) {}
 
@@ -44,14 +45,6 @@ export class AppComponent {
       locations.forEach(location => {
         const marker = new Marker();
         marker.setLngLat([location.coordinates[0], location.coordinates[1]]);
-        const popup = new Popup({ offset: 25 }).setHTML(
-          '<h3>' +
-            location.organization +
-            '</h3><div>' +
-            location.address1 +
-            '</div>'
-        );
-        marker.setPopup(popup);
         marker.addTo(this.map);
       });
     });
@@ -59,17 +52,19 @@ export class AppComponent {
 
   cardSelected(location: MapLocation) {
     console.log(location);
-    if (location.id !== this.selectedLocationId) {
-      // setting the selected location changes card styling
+    if (this.selectedLocationId !== location.id) {
+      // setting the selected location affects card styling, popup
       this.selectedLocationId = location.id;
-      this.flyToLocation(location.coordinates);
+      this.selectedLocation = location;
+      this.moveToLocation(location.coordinates, 13);
     }
   }
 
-  flyToLocation(coordinates: [number, number]) {
-    this.map.flyTo({
-      center: coordinates,
-      zoom: 15
-    });
+  moveToLocation(coordinates: [number, number], zoomLevel: number) {
+    this.map.panTo(coordinates);
+    // this.map.flyTo({
+    //   center: coordinates,
+    //   zoom: zoomLevel
+    // });
   }
 }

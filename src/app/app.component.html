@@ -13,6 +13,16 @@
         unit="imperial"
         position="bottom-right"
       ></mgl-control>
+      <mgl-popup
+        *ngIf="selectedLocationId"
+        [lngLat]="selectedLocation.coordinates"
+        (close)="selectedLocationId = null"
+        [offset]="25"
+      >
+        <h3>{{ selectedLocation.organization }}</h3>
+        <div>{{ selectedLocation.address1 }}</div>
+        <!-- <span [innerHTML]="selectedPoint.properties.description"></span> -->
+      </mgl-popup>
     </mgl-map>
   </div>
   <div class="search-container">
