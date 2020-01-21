@@ -31,6 +31,21 @@ interface Address {
   line2: string;
 }
 
+interface Feature {
+  type: 'Feature';
+  geometry: Geometry;
+  properties: Properties;
+}
+
+interface Geometry {
+  type: 'Point';
+  coordinates: [number, number];
+}
+
+interface Properties {
+  [key: string]: string;
+}
+
 export interface MapLocation extends Organization, Contact, Address {
   id: string;
   coordinates: [number, number];
@@ -65,5 +80,32 @@ export class LocationService {
     }
 
     return locations;
+  }
+
+  getFeatures(): Observable<GeoJSON.FeatureCollection<GeoJSON.Point>> {
+    return this.http
+      .get('/assets/locations.json')
+      .pipe(map((data: any) => this.toGeoJson(data)));
+  }
+
+  toGeoJson(
+    locations: MapLocation[]
+  ): GeoJSON.FeatureCollection<GeoJSON.Point> {
+    const features: Feature[] = new Array();
+    for (const l of locations) {
+      features.push({
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: l.coordinates
+        },
+        properties: {
+          fullname: l.firstname,
+          address1: l.address1
+        }
+      });
+    }
+
+    return { type: 'FeatureCollection', features };
   }
 }

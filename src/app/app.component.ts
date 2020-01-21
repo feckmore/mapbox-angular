@@ -1,6 +1,11 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component,
+  ViewChild,
+  ElementRef,
+  ChangeDetectorRef
+} from '@angular/core';
 
-import { Map, Marker, Popup } from 'mapbox-gl';
+import { Map, Marker, Popup, MapMouseEvent } from 'mapbox-gl';
 import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 
 import { environment } from 'src/environments/environment';
@@ -18,15 +23,29 @@ export class AppComponent {
   selectedLocationId: string;
   selectedLocation: MapLocation;
   center: [number, number] = [-73.995813, 40.730105];
+  points: GeoJSON.FeatureCollection<GeoJSON.Point>;
+  selectedPoint: GeoJSON.Feature<GeoJSON.Point> | null;
+  cursorStyle: string;
 
   @ViewChild('searchbox', { static: false }) searchBox: ElementRef;
 
-  constructor(private locationService: LocationService) {}
+  constructor(
+    private locationService: LocationService,
+    private changeDetectorRef: ChangeDetectorRef
+  ) {
+    this.addGeoJson();
+  }
+
+  onClick(evt: MapMouseEvent) {
+    this.selectedPoint = null;
+    this.changeDetectorRef.detectChanges();
+    // this.selectedPoint = (evt as any).features[0];
+  }
 
   loaded(map: Map) {
     this.map = map;
 
-    this.addFromService();
+    // this.addFromService();
     this.addGeocoder(map);
   }
 
@@ -38,6 +57,13 @@ export class AppComponent {
     this.searchBox.nativeElement.appendChild(geocoder.onAdd(map));
   }
 
+  addGeoJson() {
+    const result = this.locationService.getFeatures();
+    result.forEach(points => {
+      console.log('adding points');
+      this.points = points;
+    });
+  }
   addFromService() {
     const result = this.locationService.getLocations();
     result.forEach(locations => {
