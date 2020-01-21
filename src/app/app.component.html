@@ -6,6 +6,7 @@
       [center]="center"
       [attributionControl]="false"
       (load)="loaded($event)"
+      (click)="mapClick($event)"
     >
       <mgl-control mglNavigation position="top-right"></mgl-control>
       <mgl-control
@@ -13,15 +14,21 @@
         unit="imperial"
         position="bottom-right"
       ></mgl-control>
+      <ng-container *ngFor="let location of locations">
+        <mgl-marker
+          [lngLat]="location.coordinates"
+          (click)="markerClick(location)"
+        ></mgl-marker>
+      </ng-container>
+
       <mgl-popup
         *ngIf="selectedLocationId"
         [lngLat]="selectedLocation.coordinates"
-        (close)="selectedLocationId = null"
         [offset]="25"
+        (close)="unselectLocation()"
       >
         <h3>{{ selectedLocation.organization }}</h3>
         <div>{{ selectedLocation.address1 }}</div>
-        <!-- <span [innerHTML]="selectedPoint.properties.description"></span> -->
       </mgl-popup>
     </mgl-map>
   </div>
@@ -30,7 +37,7 @@
     <div class="results">
       <mat-card
         *ngFor="let location of locations"
-        (click)="cardSelected(location)"
+        (click)="cardClick(location)"
         [class.selected]="location.id == selectedLocationId"
       >
         <mat-card-header>

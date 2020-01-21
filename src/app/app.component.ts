@@ -41,16 +41,35 @@ export class AppComponent {
   addFromService() {
     const result = this.locationService.getLocations();
     result.forEach(locations => {
+      console.log('adding locations');
       this.locations = locations;
-      locations.forEach(location => {
-        const marker = new Marker();
-        marker.setLngLat([location.coordinates[0], location.coordinates[1]]);
-        marker.addTo(this.map);
-      });
+      // locations.forEach(location => {
+      //   const marker = new Marker();
+      //   marker.setLngLat([location.coordinates[0], location.coordinates[1]]);
+      //   marker.addTo(this.map);
+      // });
     });
   }
 
-  cardSelected(location: MapLocation) {
+  cardClick(location: MapLocation) {
+    console.log('card click - ' + location.id);
+    this.selectLocation(location);
+  }
+
+  markerClick(location: MapLocation) {
+    console.log('marker click - ' + location.id);
+    this.selectLocation(location);
+  }
+
+  mapClick(event) {
+    if (event.lngLat) {
+      console.log(event.lngLat);
+    }
+    console.log('map click');
+    console.log(event);
+  }
+
+  selectLocation(location: MapLocation) {
     console.log(location);
     if (this.selectedLocationId !== location.id) {
       // setting the selected location affects card styling, popup
@@ -58,6 +77,11 @@ export class AppComponent {
       this.selectedLocation = location;
       this.moveToLocation(location.coordinates, 13);
     }
+  }
+
+  unselectLocation() {
+    this.selectedLocationId = null;
+    this.selectedLocation = null;
   }
 
   moveToLocation(coordinates: [number, number], zoomLevel: number) {
