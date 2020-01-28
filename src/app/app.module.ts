@@ -11,11 +11,12 @@ import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 import { environment } from 'src/environments/environment';
 
 import { MatCardModule, MatIconModule } from '@angular/material';
+import { MarkerComponent } from './marker/marker.component';
 
 const mapboxAccessToken = environment.mapboxAccessToken;
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, MarkerComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

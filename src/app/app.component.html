@@ -6,7 +6,6 @@
       [center]="center"
       [attributionControl]="false"
       (load)="loaded($event)"
-      (click)="mapClick($event)"
     >
       <mgl-control mglNavigation position="top-right"></mgl-control>
       <mgl-control
@@ -15,13 +14,17 @@
         position="bottom-right"
       ></mgl-control>
       <ng-container *ngFor="let location of locations">
-        <mgl-marker
+        <!-- <mgl-marker
           [lngLat]="location.coordinates"
           (click)="markerClick(location)"
-        ></mgl-marker>
+        ></mgl-marker> -->
+        <app-marker
+          [location]="location"
+          (click)="markerClickParent(location)"
+        ></app-marker>
       </ng-container>
 
-      <mgl-popup
+      <!-- <mgl-popup
         *ngIf="selectedLocationId"
         [lngLat]="selectedLocation.coordinates"
         [offset]="25"
@@ -29,7 +32,7 @@
       >
         <h3>{{ selectedLocation.organization }}</h3>
         <div>{{ selectedLocation.address1 }}</div>
-      </mgl-popup>
+      </mgl-popup> -->
     </mgl-map>
   </div>
   <div class="search-container">

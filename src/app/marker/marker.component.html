@@ -1,0 +1,9 @@
+<mgl-marker
+  #myMarker
+  [lngLat]="location.coordinates"
+  (click)="markerClickChild(location)"
+></mgl-marker>
+<mgl-popup [marker]="myMarker">
+  <h3>{{ location.fullname }}</h3>
+  <div>{{ location.address1 }}</div>
+</mgl-popup>

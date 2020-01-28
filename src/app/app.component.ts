@@ -56,10 +56,10 @@ export class AppComponent {
     this.selectLocation(location);
   }
 
-  markerClick(location: MapLocation) {
-    console.log('marker click - ' + location.id);
-    this.selectLocation(location);
-  }
+  // markerClick(location: MapLocation) {
+  //   console.log('marker click - ' + location.id);
+  //   this.selectLocation(location);
+  // }
 
   mapClick(event) {
     if (event.lngLat) {
@@ -86,9 +86,10 @@ export class AppComponent {
 
   moveToLocation(coordinates: [number, number], zoomLevel: number) {
     this.map.panTo(coordinates);
-    // this.map.flyTo({
-    //   center: coordinates,
-    //   zoom: zoomLevel
-    // });
+  }
+
+  // DOES NOT WORK... click event not captured with marker component
+  markerClickParent(location: MapLocation) {
+    console.log('marker clicked from parent');
   }
 }
